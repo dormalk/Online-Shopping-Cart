@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "969119717009",
+    "firebase_url": "https://online-cart-dffb7-default-rtdb.firebaseio.com",
+    "project_id": "online-cart-dffb7",
+    "storage_bucket": "online-cart-dffb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969119717009:android:b7e5f7a5c45da318341130",
+        "android_client_info": {
+          "package_name": "com.example.online_shopping_cart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969119717009-jo9s9nn5jakhj0r6kai537ujfq7dq6je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPql3i2svE5lWquuUE1qxSAyQfQtb41eY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969119717009-jo9s9nn5jakhj0r6kai537ujfq7dq6je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
