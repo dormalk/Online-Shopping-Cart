@@ -5,7 +5,7 @@ import 'package:online_shopping_cart/widgets/cartItemTile.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
-  static const routeName = 'cart';
+  static const routeName = '/cart';
   CartScreen({Key key}) : super(key: key);
 
   @override
@@ -50,12 +50,18 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  void fetchCartFromDatabase(String id) async {
+    _currCart =
+        await Provider.of<Storage>(context, listen: true).getCartFromDB(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, Object>;
     final id = routeArgs['id'];
     _currCart = Provider.of<Storage>(context, listen: true).getCartById(id);
+    if (_currCart == null) this.fetchCartFromDatabase(id);
     return Hero(
         tag: id,
         child: Scaffold(

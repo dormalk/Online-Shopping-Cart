@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/storage.dart';
 import '../widgets/cartList.dart';
+import 'package:uni_links/uni_links.dart';
+
+import 'cartScreen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key key}) : super(key: key);
@@ -13,7 +16,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   bool _initialized = false;
   bool removeMode = false;
-
   void init() async {
     if (!_initialized) {
       await Provider.of<Storage>(context, listen: false).initialize();
@@ -22,6 +24,20 @@ class _MainScreenState extends State<MainScreen> {
           () => setState(() {
                 _initialized = true;
               }));
+      checkLink();
+    }
+  }
+
+  void checkLink() async {
+    String initialLink = await getInitialLink();
+    if (initialLink == null) return;
+    String id = initialLink.split('link/')[1];
+    final cartToDelete = await Navigator.of(context)
+        .pushNamed(CartScreen.routeName, arguments: {'id': id});
+    if (cartToDelete != null) {
+      Future.delayed(new Duration(milliseconds: 200), () {
+        Provider.of<Storage>(context, listen: false).removeCart(cartToDelete);
+      });
     }
   }
 

@@ -1,0 +1,5 @@
+1) Disable online not removed the Cart from view
+2) align to right
+3) splash screen
+4) icon
+5) allow user copy online link

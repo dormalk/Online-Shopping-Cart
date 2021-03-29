@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:online_shopping_cart/models/item.dart';
 
 import '../models/cart.dart';
@@ -8,6 +10,7 @@ import 'package:firebase_database/firebase_database.dart';
 class Storage extends ChangeNotifier {
   List<Cart> carts = [];
   LocalStorage _storage = new LocalStorage('online_carts');
+  List<StreamSubscription<Event>> subscribtions = [];
 
   Future initialize() async {
     await _storage.ready;
@@ -20,9 +23,10 @@ class Storage extends ChangeNotifier {
   }
 
   void setListenersToDatabase() {
+    for (StreamSubscription<Event> sub in this.subscribtions) sub.cancel();
     for (var cart in this.carts) {
       if (cart.isOnline) {
-        FirebaseDatabase.instance
+        StreamSubscription<Event> sub = FirebaseDatabase.instance
             .reference()
             .child('carts/${cart.id}')
             .onValue
@@ -34,6 +38,7 @@ class Storage extends ChangeNotifier {
                   .indexWhere((element) => element.id == updatedCart.id)] =
               updatedCart;
         });
+        subscribtions.add(sub);
       }
     }
   }
@@ -59,7 +64,25 @@ class Storage extends ChangeNotifier {
   }
 
   Cart getCartById(String id) {
-    return this.carts.firstWhere((element) => element.id == id);
+    try {
+      return this.carts.firstWhere((element) => element.id == id);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<Cart> getCartFromDB(String id) async {
+    DataSnapshot snapshot =
+        await FirebaseDatabase.instance.reference().child('carts/$id').once();
+    if (snapshot != null && snapshot.value != null) {
+      Cart c = Cart().fromJSON(Map<String, dynamic>.from(snapshot.value));
+      print(c);
+      this.carts.add(c);
+      setListenersToDatabase();
+      saveOnStorage();
+      return c;
+    }
+    return null;
   }
 
   void updateItemOnCart(String id, int itemIndex, Item updatedItem) {

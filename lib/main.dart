@@ -23,8 +23,11 @@ class MyApp extends StatelessWidget {
           hoverColor: Colors.transparent,
           primarySwatch: Colors.blue,
         ),
-        home: MainScreen(),
-        routes: {CartScreen.routeName: (ctx) => CartScreen()},
+        initialRoute: '/',
+        routes: {
+          '/': (ctx) => MainScreen(),
+          CartScreen.routeName: (ctx) => CartScreen()
+        },
       ),
     );
   }
