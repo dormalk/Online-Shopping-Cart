@@ -1,4 +1,5 @@
 import './item.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Cart {
   List<Item> items;
@@ -32,6 +33,7 @@ class Cart {
     this.isOnline = false;
     this.canEdit = false;
     //update database
+    FirebaseDatabase.instance.reference().child('carts/$id').remove();
   }
 
   void updateItemByIndex(int index, Item updatedItem) {

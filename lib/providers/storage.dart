@@ -50,9 +50,9 @@ class Storage extends ChangeNotifier {
 
   void removeCart(String id) {
     this.carts.removeWhere((element) => element.id == id);
-    try {
-      FirebaseDatabase.instance.reference().child('carts/$id').remove();
-    } catch (e) {}
+    // try {
+    //   FirebaseDatabase.instance.reference().child('carts/$id').remove();
+    // } catch (e) {}
     saveOnStorage();
   }
 

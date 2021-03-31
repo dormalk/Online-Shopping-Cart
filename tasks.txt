@@ -1,5 +1,6 @@
-1) Disable online not removed the Cart from view
+1) Disable online not removed the Cart from view V
 2) align to right
 3) splash screen
 4) icon
-5) allow user copy online link
+5) allow user copy online link v
+6) fix spaces in cart list line 
