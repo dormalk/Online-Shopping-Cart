@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shopping_cart/views/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import '../providers/storage.dart';
 import '../widgets/cartList.dart';
@@ -79,6 +80,6 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: Colors.yellowAccent[100],
             body: CartList(this.removeMode),
           )
-        : Text('Loading...');
+        : SplashScreen();
   }
 }
