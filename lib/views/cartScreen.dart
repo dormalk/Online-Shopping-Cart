@@ -80,18 +80,22 @@ class _CartScreenState extends State<CartScreen> {
     final id = routeArgs['id'];
     _currCart = Provider.of<Storage>(context, listen: true).getCartById(id);
     if (_currCart == null) this.fetchCartFromDatabase(id);
-    return Scaffold(
-      backgroundColor: _currCart.isOnline
-          ? Colors.blueAccent[100]
-          : Colors.yellowAccent[100],
-      appBar: _buildAppBar(),
-      body: Container(
-        child: ListView.builder(
-          itemCount: _currCart.items.length,
-          itemBuilder: (ctx, index) => CartItemTile(
-            item: _currCart.items[index],
-            index: index,
-            id: _currCart.id,
+    return Hero(
+      tag: id,
+      child: Scaffold(
+        backgroundColor: _currCart.isOnline
+            ? Colors.blueAccent[100]
+            : Colors.yellowAccent[100],
+        appBar: _buildAppBar(),
+        body: Container(
+          child: ListView.builder(
+            itemCount: _currCart.items.length,
+            itemBuilder: (ctx, index) => CartItemTile(
+              item: _currCart.items[index],
+              isLast: (_currCart.items.length - 1) == index,
+              index: index,
+              id: _currCart.id,
+            ),
           ),
         ),
       ),

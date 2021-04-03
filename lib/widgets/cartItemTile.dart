@@ -8,11 +8,13 @@ class CartItemTile extends StatelessWidget {
   final int index;
   final String id;
   final bool isEditMode;
+  final bool isLast;
   CartItemTile(
       {Key key,
       @required this.item,
       @required this.index,
       @required this.id,
+      this.isLast = true,
       this.isEditMode = true})
       : super(key: key);
 
@@ -26,7 +28,6 @@ class CartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isNotLast = item.name.length > 0;
     return Padding(
       padding: isEditMode
           ? const EdgeInsets.only(right: 25)
@@ -34,7 +35,7 @@ class CartItemTile extends StatelessWidget {
       child: Transform.scale(
         scale: isEditMode ? 1.2 : 1,
         child: Opacity(
-          opacity: isNotLast ? 1 : 0.4,
+          opacity: !this.isLast ? 1 : 0.4,
           child: SizedBox(
             height: !isEditMode ? 35 : null,
             child: CheckboxListTile(
@@ -57,7 +58,7 @@ class CartItemTile extends StatelessWidget {
                         item.name,
                         textAlign: TextAlign.right,
                       ),
-                onChanged: isEditMode && isNotLast
+                onChanged: isEditMode && (!this.isLast || index == 0)
                     ? (value) {
                         item.isCheked = value;
                         _updateItem(context, item, index);

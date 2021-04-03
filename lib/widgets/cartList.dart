@@ -21,10 +21,13 @@ class _CartListState extends State<CartList> {
   Widget _buildButton(IconData icon, Function action) {
     return InkWell(
       onTap: action,
-      child: Icon(
-        icon,
-        size: 30,
-        color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Icon(
+          icon,
+          size: 30,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -86,12 +89,14 @@ class _CartListState extends State<CartList> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListView.builder(
                           itemCount: c.items.length < 5 ? c.items.length : 5,
-                          itemBuilder: (ctx, index) => CartItemTile(
-                            item: c.items[index],
-                            index: index,
-                            id: c.id,
-                            isEditMode: false,
-                          ),
+                          itemBuilder: (ctx, index) {
+                            return CartItemTile(
+                              item: c.items[index],
+                              index: index,
+                              id: c.id,
+                              isEditMode: false,
+                            );
+                          },
                         ),
                       ),
                     );
