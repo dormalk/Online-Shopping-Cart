@@ -48,16 +48,22 @@ class CartItemTile extends StatelessWidget {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
+                        style: item.isCheked
+                            ? TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.black26)
+                            : null,
                         initialValue: item.name,
                         onChanged: (value) {
                           item.name = value;
                           _updateItem(context, item, index);
                         },
                       )
-                    : Text(
-                        item.name,
+                    : Text(item.name,
                         textAlign: TextAlign.right,
-                      ),
+                        style: item.isCheked
+                            ? TextStyle(decoration: TextDecoration.lineThrough)
+                            : null),
                 onChanged: isEditMode && (!this.isLast || index == 0)
                     ? (value) {
                         item.isCheked = value;

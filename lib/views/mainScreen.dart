@@ -63,9 +63,12 @@ class _MainScreenState extends State<MainScreen> {
                   else
                     removeMode = true;
                 }),
-            child: Icon(
-              !removeMode ? Icons.delete_rounded : Icons.delete_outline,
-              size: 30,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Icon(
+                !removeMode ? Icons.delete_rounded : Icons.delete_outline,
+                size: 30,
+              ),
             ))
       ],
     );

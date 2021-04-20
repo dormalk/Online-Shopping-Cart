@@ -40,24 +40,14 @@ class _CartListState extends State<CartList> {
             color: Colors.black26,
           ),
         ),
-        Positioned(
-            bottom: 0,
-            left: 0,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(color: Colors.black45),
-              height: 60,
-              child: Center(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildButton(
-                      Icons.delete,
-                      () => Provider.of<Storage>(context, listen: false)
-                          .removeCart(id))
-                ],
-              )),
-            ))
+        Container(
+            height: 60,
+            width: double.infinity,
+            color: Colors.black45,
+            child: _buildButton(
+                Icons.delete,
+                () => Provider.of<Storage>(context, listen: false)
+                    .removeCart(id))),
       ],
     );
   }
